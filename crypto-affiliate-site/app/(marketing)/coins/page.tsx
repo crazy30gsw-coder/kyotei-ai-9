@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight, TrendingUp } from "lucide-react";
-import { PriceTable } from "@/components/crypto/PriceTable";
+import { CoinsClient } from "./coins-client";
 
 export const metadata: Metadata = {
   title: "仮想通貨価格一覧 | リアルタイム相場チャート - CryptoNavi",
@@ -15,62 +15,7 @@ export const metadata: Metadata = {
   },
 };
 
-const COINGECKO_API_URL =
-  "https://api.coingecko.com/api/v3/coins/markets?vs_currency=jpy&order=market_cap_desc&per_page=100&page=1&sparkline=true&price_change_percentage=24h,7d";
-
-interface CoinData {
-  id: string;
-  symbol: string;
-  name: string;
-  image: string;
-  current_price: number;
-  market_cap: number;
-  market_cap_rank: number;
-  fully_diluted_valuation: number | null;
-  total_volume: number;
-  high_24h: number;
-  low_24h: number;
-  price_change_24h: number;
-  price_change_percentage_24h: number;
-  market_cap_change_24h: number;
-  market_cap_change_percentage_24h: number;
-  circulating_supply: number;
-  total_supply: number | null;
-  max_supply: number | null;
-  ath: number;
-  ath_change_percentage: number;
-  ath_date: string;
-  atl: number;
-  atl_change_percentage: number;
-  atl_date: string;
-  last_updated: string;
-  sparkline_in_7d: {
-    price: number[];
-  };
-  price_change_percentage_24h_in_currency: number;
-  price_change_percentage_7d_in_currency: number;
-}
-
-async function getCoinData(): Promise<CoinData[]> {
-  try {
-    const response = await fetch(COINGECKO_API_URL, {
-      next: { revalidate: 60 },
-    });
-
-    if (!response.ok) {
-      throw new Error(`API error: ${response.status}`);
-    }
-
-    return response.json();
-  } catch (error) {
-    console.error("Failed to fetch coin data:", error);
-    return [];
-  }
-}
-
-export default async function CoinsPage() {
-  const coins = await getCoinData();
-
+export default function CoinsPage() {
   return (
     <div className="space-y-8">
       {/* Breadcrumb */}
@@ -104,19 +49,8 @@ export default async function CoinsPage() {
         </p>
       </div>
 
-      {/* Price Table */}
-      {coins.length > 0 ? (
-        <PriceTable initialCoins={coins} />
-      ) : (
-        <div className="rounded-xl border border-border bg-card p-12 text-center">
-          <p className="text-lg font-medium text-muted-foreground">
-            価格データの取得に失敗しました。
-          </p>
-          <p className="mt-2 text-sm text-muted-foreground">
-            しばらく時間をおいてから再度アクセスしてください。
-          </p>
-        </div>
-      )}
+      {/* Client-side Price Table */}
+      <CoinsClient />
 
       {/* SEO Content Section */}
       <section className="prose-crypto mt-12 space-y-6 border-t border-border pt-8">

@@ -58,7 +58,9 @@ export function PriceTable({ initialCoins }: PriceTableProps) {
   const fetchCoins = useCallback(async () => {
     setIsRefreshing(true);
     try {
-      const res = await fetch("/api/coins");
+      const res = await fetch(
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=jpy&order=market_cap_desc&per_page=100&page=1&sparkline=true&price_change_percentage=24h,7d"
+      );
       if (res.ok) {
         const data: CoinData[] = await res.json();
         setCoins(
