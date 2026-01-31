@@ -4,137 +4,148 @@
 
 @layer base {
   /*
-   * Dark-mode-first design system for Japanese crypto affiliate site.
+   * Light-mode-first design system for Japanese crypto affiliate site.
+   * Professional design inspired by top Japanese affiliate sites
+   * (diamond.jp/crypto, kakaku.com/cryptocurrency).
+   *
    * Uses HSL values (without the hsl() wrapper) to work with Tailwind's
    * hsl(var(--variable)) pattern from the shadcn/ui convention.
    *
    * Color palette:
-   *   Primary   - Dark blue-green (trust, finance)
-   *   Secondary - Deep teal
-   *   Accent    - Gold (premium, crypto aesthetic)
+   *   Primary    - Professional blue (#1a56db) - trust, finance
+   *   CTA        - Green (#059669) - strong call-to-action
+   *   Accent     - Orange (#f59e0b) - highlights, badges
    *   Destructive - Red for warnings/losses
+   *   Background - White / light grays for clean readability
    */
 
-  /* ===== Dark mode (DEFAULT) ===== */
+  /* ===== Light mode (DEFAULT) ===== */
   :root {
     /* Base surfaces */
-    --background: 222 47% 6%;           /* #0b0f1a - deep navy black */
-    --foreground: 210 20% 92%;          /* #e6eaf0 - soft white */
+    --background: 0 0% 100%;              /* #ffffff - pure white */
+    --foreground: 220 20% 18%;            /* #252d3a - near-black for text */
 
     /* Card / elevated surfaces */
-    --card: 220 40% 9%;                 /* #101828 - slightly lighter navy */
-    --card-foreground: 210 20% 92%;
+    --card: 0 0% 100%;                    /* #ffffff - white cards */
+    --card-foreground: 220 20% 18%;
 
     /* Popover (dropdown, tooltip) */
-    --popover: 220 40% 9%;
-    --popover-foreground: 210 20% 92%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 18%;
 
-    /* Primary - dark blue-green */
-    --primary: 173 58% 39%;             /* #2a9d8f - teal green */
-    --primary-foreground: 210 20% 98%;  /* white text on primary */
+    /* Primary - professional blue */
+    --primary: 221 80% 48%;               /* #1a56db */
+    --primary-foreground: 0 0% 100%;      /* white text on primary */
 
-    /* Secondary - darker teal */
-    --secondary: 220 30% 14%;           /* #1a2332 */
-    --secondary-foreground: 210 20% 88%;
+    /* Secondary - light gray surfaces */
+    --secondary: 220 14% 96%;             /* #f3f4f6 - light gray bg */
+    --secondary-foreground: 220 20% 25%;
 
-    /* Muted - subtle backgrounds */
-    --muted: 220 25% 12%;              /* #171f2b */
-    --muted-foreground: 215 15% 55%;   /* dimmed text */
+    /* Muted - subtle backgrounds and text */
+    --muted: 220 14% 96%;                 /* #f3f4f6 */
+    --muted-foreground: 220 10% 46%;      /* #6b7280 - gray-500 */
 
-    /* Accent - gold */
-    --accent: 40 90% 55%;              /* #f5a623 - gold */
-    --accent-foreground: 222 47% 6%;   /* dark text on gold */
+    /* Accent - orange */
+    --accent: 38 92% 50%;                 /* #f59e0b */
+    --accent-foreground: 220 20% 18%;     /* dark text on orange */
 
     /* Destructive - red for errors/losses */
-    --destructive: 350 89% 60%;        /* #ef4444 */
+    --destructive: 0 84% 60%;             /* #ef4444 */
     --destructive-foreground: 0 0% 100%;
 
     /* Borders and inputs */
-    --border: 220 20% 18%;             /* subtle border */
-    --input: 220 20% 18%;
-    --ring: 173 58% 39%;               /* focus ring matches primary */
+    --border: 220 13% 91%;                /* #e5e7eb - gray-200 */
+    --input: 220 13% 91%;
+    --ring: 221 80% 48%;                  /* focus ring matches primary blue */
 
     /* Border radius */
-    --radius: 0.625rem;                /* 10px */
+    --radius: 0.5rem;                     /* 8px */
 
     /* Chart colors (for price charts, comparisons) */
-    --chart-1: 173 58% 39%;            /* teal */
-    --chart-2: 40 90% 55%;             /* gold */
-    --chart-3: 217 91% 60%;            /* blue */
-    --chart-4: 142 71% 45%;            /* green */
-    --chart-5: 350 89% 60%;            /* red */
+    --chart-1: 221 80% 48%;              /* blue */
+    --chart-2: 38 92% 50%;               /* orange */
+    --chart-3: 160 84% 39%;              /* green */
+    --chart-4: 262 83% 58%;              /* purple */
+    --chart-5: 0 84% 60%;               /* red */
 
     /* Crypto-specific semantic colors */
-    --crypto-gain: 145 63% 42%;        /* #27ae60 - price up */
-    --crypto-loss: 350 89% 60%;        /* #ef4444 - price down */
-    --crypto-btc: 28 93% 53%;          /* #f7931a - Bitcoin orange */
-    --crypto-eth: 227 68% 65%;         /* #627eea - Ethereum blue */
-    --crypto-neutral: 215 15% 55%;     /* neutral/unchanged */
+    --crypto-gain: 160 84% 39%;           /* #059669 - green for price up */
+    --crypto-loss: 0 84% 60%;             /* #ef4444 - red for price down */
+    --crypto-btc: 28 93% 53%;             /* #f7931a - Bitcoin orange */
+    --crypto-eth: 227 68% 55%;            /* #627eea - Ethereum blue */
+    --crypto-neutral: 220 10% 46%;        /* neutral/unchanged */
 
-    /* Affiliate CTA specific */
-    --cta-primary: 40 90% 55%;         /* gold - main CTA */
-    --cta-primary-hover: 40 90% 48%;   /* darker gold on hover */
-    --cta-primary-foreground: 222 47% 6%;
-    --cta-secondary: 173 58% 39%;      /* teal - secondary CTA */
-    --cta-secondary-hover: 173 58% 34%;
-    --cta-secondary-foreground: 210 20% 98%;
+    /* Affiliate CTA specific - GREEN for strong conversion */
+    --cta-primary: 160 84% 39%;           /* #059669 - green CTA */
+    --cta-primary-hover: 160 84% 33%;     /* darker green on hover */
+    --cta-primary-foreground: 0 0% 100%;  /* white text */
+    --cta-secondary: 221 80% 48%;         /* blue - secondary CTA */
+    --cta-secondary-hover: 221 80% 42%;
+    --cta-secondary-foreground: 0 0% 100%;
 
     /* Trust / rating indicators */
-    --rating-star: 40 90% 55%;         /* gold stars */
-    --trust-badge: 173 58% 39%;        /* teal badge */
+    --rating-star: 38 92% 50%;            /* #f59e0b - gold stars */
+    --trust-badge: 221 80% 48%;           /* blue badge */
+
+    /* Section backgrounds */
+    --section-alt: 220 14% 97%;           /* #f8f9fa - alternating section bg */
+    --section-highlight: 221 80% 97%;     /* very light blue tint */
   }
 
-  /* ===== Light mode override ===== */
-  .light {
-    --background: 0 0% 100%;           /* pure white */
-    --foreground: 222 47% 11%;         /* near-black */
+  /* ===== Dark mode override ===== */
+  .dark {
+    --background: 222 47% 6%;             /* #0b0f1a */
+    --foreground: 210 20% 92%;            /* #e6eaf0 */
 
-    --card: 210 20% 98%;               /* off-white */
-    --card-foreground: 222 47% 11%;
+    --card: 220 40% 9%;                   /* #101828 */
+    --card-foreground: 210 20% 92%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover: 220 40% 9%;
+    --popover-foreground: 210 20% 92%;
 
-    --primary: 173 58% 34%;            /* slightly darker teal for contrast */
+    --primary: 221 80% 56%;               /* brighter blue for dark bg */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 20% 96%;
-    --secondary-foreground: 222 30% 20%;
+    --secondary: 220 30% 14%;
+    --secondary-foreground: 210 20% 88%;
 
-    --muted: 210 20% 96%;
-    --muted-foreground: 215 15% 40%;
+    --muted: 220 25% 12%;
+    --muted-foreground: 215 15% 55%;
 
-    --accent: 40 90% 50%;              /* gold */
+    --accent: 38 92% 55%;
     --accent-foreground: 222 47% 6%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 20% 88%;
-    --input: 214 20% 88%;
-    --ring: 173 58% 34%;
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: 221 80% 56%;
 
-    --chart-1: 173 58% 34%;
-    --chart-2: 40 90% 50%;
-    --chart-3: 217 91% 50%;
-    --chart-4: 142 71% 40%;
-    --chart-5: 350 89% 55%;
+    --chart-1: 221 80% 56%;
+    --chart-2: 38 92% 55%;
+    --chart-3: 160 84% 45%;
+    --chart-4: 262 83% 65%;
+    --chart-5: 0 84% 60%;
 
-    --crypto-gain: 145 63% 35%;
-    --crypto-loss: 0 84% 50%;
-    --crypto-btc: 28 93% 48%;
-    --crypto-eth: 227 68% 55%;
-    --crypto-neutral: 215 15% 45%;
+    --crypto-gain: 145 63% 42%;
+    --crypto-loss: 0 84% 60%;
+    --crypto-btc: 28 93% 53%;
+    --crypto-eth: 227 68% 65%;
+    --crypto-neutral: 215 15% 55%;
 
-    --cta-primary: 40 90% 50%;
-    --cta-primary-hover: 40 90% 42%;
-    --cta-primary-foreground: 222 47% 6%;
-    --cta-secondary: 173 58% 34%;
-    --cta-secondary-hover: 173 58% 28%;
+    --cta-primary: 160 84% 45%;
+    --cta-primary-hover: 160 84% 38%;
+    --cta-primary-foreground: 0 0% 100%;
+    --cta-secondary: 221 80% 56%;
+    --cta-secondary-hover: 221 80% 48%;
     --cta-secondary-foreground: 0 0% 100%;
 
-    --rating-star: 40 90% 50%;
-    --trust-badge: 173 58% 34%;
+    --rating-star: 38 92% 55%;
+    --trust-badge: 221 80% 56%;
+
+    --section-alt: 220 30% 8%;
+    --section-highlight: 221 50% 10%;
   }
 }
 
@@ -148,6 +159,8 @@
     color: hsl(var(--foreground));
     font-family: var(--font-geist-sans), "Hiragino Sans", "Hiragino Kaku Gothic ProN",
       "Noto Sans JP", "Yu Gothic", "Meiryo", sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
     font-feature-settings: "palt";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -156,8 +169,24 @@
   /* Japanese typography adjustments */
   h1, h2, h3, h4, h5, h6 {
     font-feature-settings: "palt";
-    line-height: 1.4;
+    line-height: 1.5;
     letter-spacing: 0.02em;
+    color: hsl(var(--foreground));
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 800;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
   }
 
   p {
@@ -171,40 +200,78 @@
     word-break: break-all;
     overflow-wrap: break-word;
   }
+
+  /* Links */
+  a {
+    color: hsl(var(--primary));
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  a:hover {
+    color: hsl(var(--primary) / 0.8);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
 }
 
 @layer components {
-  /* ===== Affiliate CTA Button Styles ===== */
+  /* ===== Affiliate CTA Button Styles (GREEN, large, prominent) ===== */
   .btn-cta-primary {
     @apply inline-flex items-center justify-center gap-2
-      rounded-lg px-6 py-3
+      rounded-lg
       text-base font-bold
       transition-all duration-200 ease-in-out;
+    padding: 16px 32px;
     background-color: hsl(var(--cta-primary));
     color: hsl(var(--cta-primary-foreground));
-    box-shadow: 0 2px 8px hsl(var(--cta-primary) / 0.3);
+    box-shadow: 0 2px 8px hsl(var(--cta-primary) / 0.25);
+    letter-spacing: 0.05em;
   }
   .btn-cta-primary:hover {
     background-color: hsl(var(--cta-primary-hover));
-    box-shadow: 0 4px 16px hsl(var(--cta-primary) / 0.4);
-    transform: translateY(-1px);
+    box-shadow: 0 4px 16px hsl(var(--cta-primary) / 0.35);
+    transform: translateY(-2px);
+    text-decoration: none;
+    color: hsl(var(--cta-primary-foreground));
   }
   .btn-cta-primary:active {
     transform: translateY(0);
-    box-shadow: 0 1px 4px hsl(var(--cta-primary) / 0.3);
+    box-shadow: 0 1px 4px hsl(var(--cta-primary) / 0.25);
   }
 
   .btn-cta-secondary {
     @apply inline-flex items-center justify-center gap-2
-      rounded-lg px-6 py-3
+      rounded-lg
       text-base font-bold
       transition-all duration-200 ease-in-out;
+    padding: 12px 24px;
     background-color: hsl(var(--cta-secondary));
     color: hsl(var(--cta-secondary-foreground));
+    box-shadow: 0 1px 4px hsl(var(--cta-secondary) / 0.2);
   }
   .btn-cta-secondary:hover {
     background-color: hsl(var(--cta-secondary-hover));
     transform: translateY(-1px);
+    box-shadow: 0 2px 8px hsl(var(--cta-secondary) / 0.3);
+    text-decoration: none;
+    color: hsl(var(--cta-secondary-foreground));
+  }
+
+  /* Outline variant for less prominent CTAs */
+  .btn-cta-outline {
+    @apply inline-flex items-center justify-center gap-2
+      rounded-lg
+      text-base font-semibold
+      transition-all duration-200 ease-in-out;
+    padding: 12px 24px;
+    background-color: transparent;
+    color: hsl(var(--cta-primary));
+    border: 2px solid hsl(var(--cta-primary));
+  }
+  .btn-cta-outline:hover {
+    background-color: hsl(var(--cta-primary));
+    color: hsl(var(--cta-primary-foreground));
+    text-decoration: none;
   }
 
   /* ===== Exchange comparison card ===== */
@@ -213,14 +280,16 @@
       transition-all duration-200;
     background-color: hsl(var(--card));
     border-color: hsl(var(--border));
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
   .exchange-card:hover {
     border-color: hsl(var(--primary));
-    box-shadow: 0 0 24px hsl(var(--primary) / 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
   }
   .exchange-card.recommended {
     border-color: hsl(var(--accent));
-    box-shadow: 0 0 24px hsl(var(--accent) / 0.15);
+    box-shadow: 0 4px 16px hsl(var(--accent) / 0.15);
   }
   .exchange-card.recommended::before {
     content: "";
@@ -231,49 +300,101 @@
       hsl(var(--primary))
     );
   }
+  .exchange-card .exchange-rank {
+    @apply inline-flex items-center justify-center rounded-full text-sm font-bold;
+    width: 32px;
+    height: 32px;
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+  .exchange-card .exchange-rank.rank-1 {
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
 
   /* ===== Price change indicators ===== */
   .price-up {
     color: hsl(var(--crypto-gain));
+    font-weight: 600;
+  }
+  .price-up::before {
+    content: "\25B2 ";
+    font-size: 0.75em;
   }
   .price-down {
     color: hsl(var(--crypto-loss));
+    font-weight: 600;
+  }
+  .price-down::before {
+    content: "\25BC ";
+    font-size: 0.75em;
   }
   .price-neutral {
     color: hsl(var(--crypto-neutral));
   }
 
-  /* ===== Star rating ===== */
+  /* ===== Star rating (gold) ===== */
   .rating-star {
     color: hsl(var(--rating-star));
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1));
   }
   .rating-star-empty {
-    color: hsl(var(--muted));
+    color: hsl(var(--border));
   }
 
   /* ===== Trust badge ===== */
   .trust-badge {
     @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1
       text-xs font-semibold;
-    background-color: hsl(var(--trust-badge) / 0.15);
+    background-color: hsl(var(--trust-badge) / 0.1);
     color: hsl(var(--trust-badge));
+    border: 1px solid hsl(var(--trust-badge) / 0.2);
+  }
+  .trust-badge-success {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1
+      text-xs font-semibold;
+    background-color: hsl(var(--crypto-gain) / 0.1);
+    color: hsl(var(--crypto-gain));
+    border: 1px solid hsl(var(--crypto-gain) / 0.2);
   }
 
-  /* ===== Comparison table ===== */
+  /* ===== Comparison table with alternating rows ===== */
   .comparison-table {
     @apply w-full border-collapse overflow-hidden rounded-xl;
+    border: 1px solid hsl(var(--border));
   }
   .comparison-table th {
     @apply px-4 py-3 text-left text-sm font-semibold;
-    background-color: hsl(var(--secondary));
-    color: hsl(var(--secondary-foreground));
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    border-bottom: 2px solid hsl(var(--primary));
   }
   .comparison-table td {
-    @apply border-b px-4 py-3 text-sm;
-    border-color: hsl(var(--border));
+    @apply px-4 py-3 text-sm;
+    border-bottom: 1px solid hsl(var(--border));
   }
-  .comparison-table tr:hover td {
-    background-color: hsl(var(--muted) / 0.5);
+  .comparison-table tbody tr:nth-child(even) {
+    background-color: hsl(var(--section-alt));
+  }
+  .comparison-table tbody tr:nth-child(odd) {
+    background-color: hsl(var(--card));
+  }
+  .comparison-table tbody tr:hover td {
+    background-color: hsl(var(--section-highlight));
+  }
+  .comparison-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* ===== Section dividers with light gray background ===== */
+  .section-alt {
+    background-color: hsl(var(--section-alt));
+  }
+  .section-highlight {
+    background-color: hsl(var(--section-highlight));
+  }
+  .section-divider {
+    border-top: 1px solid hsl(var(--border));
   }
 
   /* ===== Content prose ===== */
@@ -294,40 +415,58 @@
     color: hsl(var(--primary));
     text-decoration: underline;
     text-underline-offset: 2px;
+    font-weight: 500;
   }
   .prose-crypto a:hover {
-    color: hsl(var(--accent));
+    color: hsl(var(--primary) / 0.8);
   }
   .prose-crypto blockquote {
     @apply my-6 rounded-r-lg border-l-4 py-4 pl-4 pr-6;
-    border-color: hsl(var(--accent));
-    background-color: hsl(var(--muted));
-    color: hsl(var(--muted-foreground));
+    border-color: hsl(var(--primary));
+    background-color: hsl(var(--section-highlight));
+    color: hsl(var(--foreground));
   }
   .prose-crypto code {
     @apply rounded px-1.5 py-0.5 text-sm;
     background-color: hsl(var(--muted));
-    color: hsl(var(--accent));
+    color: hsl(var(--primary));
     font-family: var(--font-geist-mono), monospace;
   }
   .prose-crypto table {
     @apply my-6 w-full border-collapse overflow-hidden rounded-lg;
+    border: 1px solid hsl(var(--border));
   }
   .prose-crypto table th {
     @apply px-4 py-2.5 text-left text-sm font-semibold;
-    background-color: hsl(var(--secondary));
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
   }
   .prose-crypto table td {
     @apply border-b px-4 py-2.5 text-sm;
     border-color: hsl(var(--border));
   }
+  .prose-crypto table tbody tr:nth-child(even) {
+    background-color: hsl(var(--section-alt));
+  }
 
-  /* ===== Gradient backgrounds (hero, featured sections) ===== */
+  /* ===== Info box / callout ===== */
+  .info-box {
+    @apply rounded-lg border p-4 my-4;
+    background-color: hsl(var(--section-highlight));
+    border-color: hsl(var(--primary) / 0.3);
+  }
+  .info-box-warning {
+    @apply rounded-lg border p-4 my-4;
+    background-color: hsl(var(--accent) / 0.08);
+    border-color: hsl(var(--accent) / 0.3);
+  }
+
+  /* ===== Hero / featured sections (light mode friendly) ===== */
   .gradient-hero {
     background: linear-gradient(
       135deg,
-      hsl(var(--background)) 0%,
-      hsl(220 40% 12%) 50%,
+      hsl(221 80% 97%) 0%,
+      hsl(221 80% 94%) 50%,
       hsl(var(--background)) 100%
     );
   }
@@ -335,32 +474,65 @@
     background: linear-gradient(
       135deg,
       hsl(var(--primary)),
-      hsl(173 58% 30%)
+      hsl(221 80% 40%)
     );
+    color: hsl(var(--primary-foreground));
   }
-  .gradient-gold {
+  .gradient-cta {
     background: linear-gradient(
       135deg,
-      hsl(var(--accent)),
-      hsl(40 90% 45%)
+      hsl(var(--cta-primary)),
+      hsl(160 84% 33%)
     );
+    color: hsl(var(--cta-primary-foreground));
   }
   .gradient-card {
     background: linear-gradient(
       180deg,
       hsl(var(--card)) 0%,
-      hsl(220 35% 7%) 100%
+      hsl(var(--section-alt)) 100%
     );
   }
 
-  /* ===== Glow effects ===== */
-  .glow-primary {
-    box-shadow: 0 0 32px hsl(var(--primary) / 0.2),
-                0 0 64px hsl(var(--primary) / 0.1);
+  /* ===== Number badge (for rankings) ===== */
+  .rank-badge {
+    @apply inline-flex items-center justify-center rounded-full font-bold;
+    width: 28px;
+    height: 28px;
+    font-size: 0.875rem;
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
   }
-  .glow-accent {
-    box-shadow: 0 0 32px hsl(var(--accent) / 0.2),
-                0 0 64px hsl(var(--accent) / 0.1);
+  .rank-badge.rank-1 {
+    background-color: hsl(38 92% 50%);
+    color: #fff;
+  }
+  .rank-badge.rank-2 {
+    background-color: hsl(220 10% 60%);
+    color: #fff;
+  }
+  .rank-badge.rank-3 {
+    background-color: hsl(25 60% 50%);
+    color: #fff;
+  }
+
+  /* ===== Subtle card (for sidebar, feature boxes) ===== */
+  .card-subtle {
+    @apply rounded-xl border p-5;
+    background-color: hsl(var(--card));
+    border-color: hsl(var(--border));
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  .card-subtle:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  /* ===== Featured / highlighted card ===== */
+  .card-featured {
+    @apply rounded-xl border-2 p-5;
+    background-color: hsl(var(--card));
+    border-color: hsl(var(--primary));
+    box-shadow: 0 2px 8px hsl(var(--primary) / 0.1);
   }
 }
 
@@ -369,7 +541,7 @@
     text-wrap: balance;
   }
 
-  /* Scrollbar styling for dark theme */
+  /* Scrollbar styling for light theme */
   .scrollbar-crypto {
     scrollbar-width: thin;
     scrollbar-color: hsl(var(--border)) transparent;
@@ -398,11 +570,37 @@
   }
 
   @keyframes flash-green {
-    0% { background-color: hsl(var(--crypto-gain) / 0.3); }
+    0% { background-color: hsl(var(--crypto-gain) / 0.15); }
     100% { background-color: transparent; }
   }
   @keyframes flash-red {
-    0% { background-color: hsl(var(--crypto-loss) / 0.3); }
+    0% { background-color: hsl(var(--crypto-loss) / 0.15); }
     100% { background-color: transparent; }
+  }
+
+  /* Responsive spacing helpers */
+  .section-padding {
+    @apply px-4 py-12;
+  }
+  @media (min-width: 768px) {
+    .section-padding {
+      @apply px-6 py-16;
+    }
+  }
+  @media (min-width: 1024px) {
+    .section-padding {
+      @apply px-8 py-20;
+    }
+  }
+
+  /* Shadow utilities matching the design system */
+  .shadow-card {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  .shadow-card-hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  .shadow-elevated {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   }
 }

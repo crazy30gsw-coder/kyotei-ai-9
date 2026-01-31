@@ -2,6 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   output: 'export',
+  basePath: '/kyotei-ai-9',
+  assetPrefix: '/kyotei-ai-9/',
   images: {
     unoptimized: true,
     remotePatterns: [
