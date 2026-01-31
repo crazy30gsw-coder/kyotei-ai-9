@@ -1,17 +1,21 @@
-name: Deploy CryptoNavi
+name: Deploy CryptoNavi to GitHub Pages
 
 on:
   push:
-    branches: ["claude/crypto-affiliate-site-j5GQA"]
-    paths:
-      - "crypto-affiliate-site/**"
+    branches: ["claude/crypto-affiliate-site-j5GQA", "main"]
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,25 +36,21 @@ jobs:
         working-directory: crypto-affiliate-site
         run: npm run build
 
-      - name: Deploy to root
-        run: |
-          # Remove old output files from root (keep .git, .github, crypto-affiliate-site, README.md)
-          find . -maxdepth 1 \
-            ! -name '.' \
-            ! -name '.git' \
-            ! -name '.github' \
-            ! -name 'crypto-affiliate-site' \
-            ! -name 'README.md' \
-            -exec rm -rf {} +
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
-          # Copy new build output to root
-          cp -r crypto-affiliate-site/out/* .
-          touch .nojekyll
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: crypto-affiliate-site/out
 
-      - name: Commit and push
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git diff --cached --quiet || git commit -m "deploy: update CryptoNavi site"
-          git push
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
