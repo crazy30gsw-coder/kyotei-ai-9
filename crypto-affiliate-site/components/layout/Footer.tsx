@@ -3,17 +3,17 @@ import Link from "next/link";
 const exchangeLinks = [
   { href: "/exchanges/bitflyer", label: "bitFlyer" },
   { href: "/exchanges/coincheck", label: "Coincheck" },
-  { href: "/exchanges/gmo", label: "GMOコイン" },
+  { href: "/exchanges/gmo-coin", label: "GMOコイン" },
   { href: "/exchanges/bitbank", label: "bitbank" },
-  { href: "/exchanges/dmm", label: "DMM Bitcoin" },
+  { href: "/exchanges/dmm-bitcoin", label: "DMM Bitcoin" },
 ] as const;
 
 const contentLinks = [
-  { href: "/guides/beginners", label: "初心者ガイド" },
-  { href: "/guides/glossary", label: "用語集" },
-  { href: "/guides/tax", label: "税金ガイド" },
+  { href: "/guides/crypto-beginners-guide", label: "初心者ガイド" },
+  { href: "/guides/how-to-buy-bitcoin", label: "ビットコインの買い方" },
+  { href: "/guides/exchange-comparison-guide", label: "取引所比較ガイド" },
   { href: "/tools/calculator", label: "手数料計算機" },
-  { href: "/tools/profit-simulator", label: "利益シミュレーター" },
+  { href: "/tools/simulator", label: "積立シミュレーター" },
 ] as const;
 
 const aboutLinks = [

@@ -1,29 +1,26 @@
 import Link from "next/link";
 import {
-  ArrowRight,
-  TrendingUp,
   Shield,
+  Coins,
+  TrendingUp,
+  ArrowRight,
+  Star,
+  CheckCircle,
+  ExternalLink,
   BookOpen,
   Calculator,
-  Star,
-  ChevronRight,
-  Zap,
   BarChart3,
 } from "lucide-react";
 import { ExchangeCard } from "@/components/crypto/ExchangeCard";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { ExchangeLogo } from "@/components/crypto/ExchangeLogo";
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
-import { getExchangesByRating } from "@/lib/data/exchanges";
+  getExchangesByRating,
+  getDomesticExchanges,
+} from "@/lib/data/exchanges";
 
 export default function Home() {
-  const topExchanges = getExchangesByRating().slice(0, 3);
+  const topExchanges = getExchangesByRating("domestic").slice(0, 3);
+  const domesticExchanges = getDomesticExchanges();
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -31,7 +28,7 @@ export default function Home() {
     name: "CryptoNavi - 仮想通貨ナビ",
     url: "https://cryptonavi.jp",
     description:
-      "仮想通貨・暗号資産の総合情報サイト。取引所比較、価格情報、初心者ガイドなど、暗号資産投資に必要な情報をすべてお届けします。",
+      "仮想通貨・暗号資産取引所を徹底比較。金融庁登録済の国内取引所を手数料・セキュリティ・取扱通貨数で比較し、おすすめランキングを掲載。",
     potentialAction: {
       "@type": "SearchAction",
       target: "https://cryptonavi.jp/search?q={search_term_string}",
@@ -48,83 +45,54 @@ export default function Home() {
       />
 
       {/* ================================================================== */}
-      {/* Hero Section */}
+      {/* Section 1: Hero */}
       {/* ================================================================== */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-background via-background to-muted/30 pt-16 pb-20 sm:pt-24 sm:pb-28">
-        {/* Decorative background elements */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-1/4 left-1/4 h-72 w-72 rounded-full bg-primary/5 blur-3xl" />
-          <div className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-gold/5 blur-3xl" />
-        </div>
-
-        <div className="container mx-auto px-4 text-center">
-          <Badge variant="secondary" className="mb-6 px-4 py-1.5 text-sm">
-            <Zap className="mr-1.5 h-3.5 w-3.5" />
-            2025年最新情報を毎日更新中
-          </Badge>
-
-          <h1 className="mx-auto max-w-4xl text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-            CryptoNavi
-            <span className="block mt-2 bg-gradient-to-r from-primary via-blue-400 to-gold bg-clip-text text-transparent">
-              仮想通貨ナビ
-            </span>
-          </h1>
-
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground leading-relaxed sm:text-xl">
-            仮想通貨・暗号資産の取引所比較、最新価格情報、初心者ガイドまで。
-            <br className="hidden sm:inline" />
-            あなたの暗号資産投資を完全サポートする総合情報サイトです。
-          </p>
-
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button asChild size="lg" variant="gold" className="text-base px-8">
-              <Link href="/exchanges">
-                取引所ランキングを見る
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="text-base px-8">
-              <Link href="/guides/crypto-beginners-guide">
-                初心者ガイドを読む
-                <BookOpen className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+      <section className="relative bg-gradient-to-r from-blue-600 to-blue-800 py-16 sm:py-20">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDE4YzEuNjU3IDAgMy0xLjM0MyAzLTNzLTEuMzQzLTMtMy0zLTMgMS4zNDMtMyAzIDEuMzQzIDMgMyAzem0tMjQgMjRjMS42NTcgMCAzLTEuMzQzIDMtM3MtMS4zNDMtMy0zLTMtMyAxLjM0My0zIDMgMS4zNDMgMyAzIDN6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-30" />
+        <div className="relative max-w-6xl mx-auto px-4 text-center">
+          {/* Update date badge */}
+          <div className="inline-flex items-center gap-2 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 px-4 py-1.5 text-sm text-white mb-6">
+            <CheckCircle className="h-4 w-4" />
+            <span>2026年1月31日 更新</span>
           </div>
 
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
+            仮想通貨取引所おすすめランキング
+          </h1>
+          <p className="mt-4 text-lg sm:text-xl text-blue-100 font-medium">
+            【2026年1月最新】初心者にもわかりやすく徹底比較
+          </p>
+
           {/* Trust indicators */}
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <Shield className="h-4 w-4 text-crypto-green" />
-              <span>金融庁登録済み取引所を厳選</span>
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
+            <div className="flex items-center gap-2 text-white/90 text-sm">
+              <Shield className="h-4 w-4 text-emerald-300" />
+              <span>金融庁登録済の取引所のみ掲載</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Star className="h-4 w-4 text-gold" />
-              <span>独自評価で徹底比較</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <TrendingUp className="h-4 w-4 text-primary" />
-              <span>リアルタイム価格情報</span>
+            <div className="flex items-center gap-2 text-white/90 text-sm">
+              <CheckCircle className="h-4 w-4 text-emerald-300" />
+              <span>編集部が実際に利用して検証</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* ================================================================== */}
-      {/* 今月のおすすめ取引所 Section */}
+      {/* Section 2: Quick Ranking TOP 3 */}
       {/* ================================================================== */}
-      <section className="py-16 sm:py-20 bg-background">
-        <div className="container mx-auto px-4">
+      <section className="py-16 sm:py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
-            <Badge variant="warning" className="mb-4">
-              <Star className="mr-1 h-3 w-3" />
-              厳選ピックアップ
-            </Badge>
-            <h2 className="text-3xl font-bold text-foreground sm:text-4xl">
-              今月のおすすめ取引所
+            <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 border border-amber-200 px-4 py-1.5 text-sm text-amber-700 font-medium mb-4">
+              <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
+              <span>編集部おすすめ</span>
+            </div>
+            <h2 className="text-3xl font-bold text-gray-900">
+              おすすめ取引所ランキングTOP3
             </h2>
-            <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
+            <p className="mt-3 text-gray-600 max-w-2xl mx-auto">
               手数料・セキュリティ・使いやすさを総合的に評価し、
-              編集部が厳選したおすすめの暗号資産取引所をご紹介します。
+              編集部が厳選した国内暗号資産取引所をご紹介します。
             </p>
           </div>
 
@@ -139,411 +107,390 @@ export default function Home() {
           </div>
 
           <div className="mt-10 text-center">
-            <Button asChild variant="outline" size="lg">
-              <Link href="/exchanges">
-                すべての取引所を比較する
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+            <Link
+              href="/exchanges"
+              className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors"
+            >
+              すべての取引所ランキングを見る
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </div>
       </section>
 
       {/* ================================================================== */}
-      {/* 取引所比較 Quick Comparison Section */}
+      {/* Section 3: Comparison Table */}
       {/* ================================================================== */}
-      <section className="py-16 sm:py-20 bg-muted/30">
-        <div className="container mx-auto px-4">
+      <section className="py-16 sm:py-20 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground sm:text-4xl">
-              取引所比較ハイライト
+            <h2 className="text-3xl font-bold text-gray-900">
+              主要取引所 比較一覧表
             </h2>
-            <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
-              目的に合った取引所が一目でわかる比較ポイントをまとめました。
+            <p className="mt-3 text-gray-600 max-w-2xl mx-auto">
+              国内主要取引所の手数料・取扱通貨数・レバレッジを一目で比較できます。
             </p>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <Card className="border-primary/20 hover:border-primary/40 transition-colors">
-              <CardHeader className="pb-3">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                    <Shield className="h-5 w-5 text-primary" />
-                  </div>
-                  <CardTitle className="text-lg">安全性で選ぶなら</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground mb-3">
-                  コールドウォレット比率が高く、保険制度が充実している取引所を厳選。
-                </p>
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-medium">GMOコイン</span>
-                    <Badge variant="success">おすすめ</Badge>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-medium">Coincheck</span>
-                    <Badge variant="secondary">高評価</Badge>
-                  </div>
-                </div>
-                <Link
-                  href="/exchanges?sort=security"
-                  className="mt-4 inline-flex items-center text-sm text-primary hover:underline"
-                >
-                  セキュリティ比較を見る
-                  <ChevronRight className="ml-1 h-3 w-3" />
-                </Link>
-              </CardContent>
-            </Card>
-
-            <Card className="border-gold/20 hover:border-gold/40 transition-colors">
-              <CardHeader className="pb-3">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gold/10">
-                    <Zap className="h-5 w-5 text-gold" />
-                  </div>
-                  <CardTitle className="text-lg">手数料の安さで選ぶなら</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground mb-3">
-                  取引手数料・入出金手数料が無料またはお得な取引所をピックアップ。
-                </p>
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-medium">GMOコイン</span>
-                    <Badge variant="success">手数料無料</Badge>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-medium">BITPOINT</span>
-                    <Badge variant="secondary">完全無料</Badge>
-                  </div>
-                </div>
-                <Link
-                  href="/exchanges?sort=fees"
-                  className="mt-4 inline-flex items-center text-sm text-primary hover:underline"
-                >
-                  手数料比較を見る
-                  <ChevronRight className="ml-1 h-3 w-3" />
-                </Link>
-              </CardContent>
-            </Card>
-
-            <Card className="border-crypto-green/20 hover:border-crypto-green/40 transition-colors">
-              <CardHeader className="pb-3">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-crypto-green/10">
-                    <TrendingUp className="h-5 w-5 text-crypto-green" />
-                  </div>
-                  <CardTitle className="text-lg">初心者におすすめ</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground mb-3">
-                  使いやすさ・サポート体制・少額投資対応で初心者に最適な取引所。
-                </p>
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-medium">Coincheck</span>
-                    <Badge variant="success">500円から</Badge>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-medium">bitFlyer</span>
-                    <Badge variant="secondary">国内No.1</Badge>
-                  </div>
-                </div>
-                <Link
-                  href="/exchanges?filter=beginner"
-                  className="mt-4 inline-flex items-center text-sm text-primary hover:underline"
-                >
-                  初心者向け取引所を見る
-                  <ChevronRight className="ml-1 h-3 w-3" />
-                </Link>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* ================================================================== */}
-      {/* 最新の仮想通貨価格 Section */}
-      {/* ================================================================== */}
-      <section className="py-16 sm:py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground sm:text-4xl">
-              最新の仮想通貨価格
-            </h2>
-            <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
-              主要な暗号資産のリアルタイム価格情報をチェックしましょう。
-            </p>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                name: "Bitcoin",
-                symbol: "BTC",
-                color: "text-[#F7931A]",
-                bgColor: "bg-[#F7931A]/10",
-              },
-              {
-                name: "Ethereum",
-                symbol: "ETH",
-                color: "text-[#627EEA]",
-                bgColor: "bg-[#627EEA]/10",
-              },
-              {
-                name: "Ripple",
-                symbol: "XRP",
-                color: "text-[#00AAE4]",
-                bgColor: "bg-[#00AAE4]/10",
-              },
-              {
-                name: "Solana",
-                symbol: "SOL",
-                color: "text-[#9945FF]",
-                bgColor: "bg-[#9945FF]/10",
-              },
-            ].map((coin) => (
-              <Card
-                key={coin.symbol}
-                className="hover:shadow-md transition-shadow"
-              >
-                <CardContent className="p-5">
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={`flex h-10 w-10 items-center justify-center rounded-full ${coin.bgColor}`}
-                    >
-                      <span className={`text-sm font-bold ${coin.color}`}>
-                        {coin.symbol.charAt(0)}
-                      </span>
-                    </div>
-                    <div>
-                      <p className="font-semibold text-foreground">
-                        {coin.name}
-                      </p>
-                      <p className="text-xs text-muted-foreground">
-                        {coin.symbol}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="mt-3 flex items-end justify-between">
-                    <div className="text-xs text-muted-foreground">
-                      最新価格は価格ページで確認
-                    </div>
-                    <TrendingUp className="h-4 w-4 text-crypto-green" />
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="mt-8 text-center">
-            <Button asChild variant="outline" size="lg">
-              <Link href="/coins">
-                すべての価格を見る
-                <BarChart3 className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* ================================================================== */}
-      {/* Affiliate CTA Banner */}
-      {/* ================================================================== */}
-      <section className="py-12 bg-gradient-to-r from-primary/10 via-gold/10 to-primary/10">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
-            今なら口座開設キャンペーン実施中!
-          </h2>
-          <p className="mt-3 text-muted-foreground max-w-xl mx-auto">
-            対象の取引所で新規口座を開設すると、ビットコインやボーナスがもらえるキャンペーンを実施中。
-            この機会をお見逃しなく。
-          </p>
-          <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button asChild variant="gold" size="lg" className="text-base px-8">
-              <Link href="/exchanges">
-                キャンペーン一覧を見る
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* ================================================================== */}
-      {/* 初心者ガイド Section */}
-      {/* ================================================================== */}
-      <section className="py-16 sm:py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <Badge variant="secondary" className="mb-4">
-              <BookOpen className="mr-1 h-3 w-3" />
-              学習コンテンツ
-            </Badge>
-            <h2 className="text-3xl font-bold text-foreground sm:text-4xl">
-              初心者ガイド
-            </h2>
-            <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
-              仮想通貨を始めるために必要な知識をゼロから丁寧に解説します。
-            </p>
-          </div>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                title: "仮想通貨の始め方完全ガイド",
-                description:
-                  "仮想通貨の基礎知識から口座開設、初めての購入まで。初心者が知っておくべきことをすべて解説。",
-                href: "/guides/crypto-beginners-guide",
-                icon: BookOpen,
-                badge: "入門",
-              },
-              {
-                title: "ビットコインの購入方法ガイド",
-                description:
-                  "ビットコインの具体的な買い方を5ステップで解説。おすすめ取引所や手数料を抑えるコツも。",
-                href: "/guides/how-to-buy-bitcoin",
-                icon: TrendingUp,
-                badge: "実践",
-              },
-              {
-                title: "取引所の選び方・比較ガイド",
-                description:
-                  "手数料・セキュリティ・使いやすさなど、取引所を選ぶ際のポイントを徹底解説。",
-                href: "/guides/exchange-comparison-guide",
-                icon: BarChart3,
-                badge: "比較",
-              },
-            ].map((guide) => (
-              <Link key={guide.href} href={guide.href} className="group">
-                <Card className="h-full hover:shadow-lg hover:border-primary/30 transition-all duration-300">
-                  <CardHeader>
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                        <guide.icon className="h-5 w-5 text-primary" />
+          <div className="overflow-x-auto rounded-xl border border-gray-200 shadow-sm">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-gray-100 border-b border-gray-200">
+                  <th className="text-left px-4 py-3.5 font-semibold text-gray-700 whitespace-nowrap">
+                    取引所名
+                  </th>
+                  <th className="text-center px-4 py-3.5 font-semibold text-gray-700 whitespace-nowrap">
+                    取扱通貨数
+                  </th>
+                  <th className="text-center px-4 py-3.5 font-semibold text-gray-700 whitespace-nowrap">
+                    取引手数料
+                  </th>
+                  <th className="text-center px-4 py-3.5 font-semibold text-gray-700 whitespace-nowrap">
+                    最低取引額
+                  </th>
+                  <th className="text-center px-4 py-3.5 font-semibold text-gray-700 whitespace-nowrap">
+                    レバレッジ
+                  </th>
+                  <th className="text-center px-4 py-3.5 font-semibold text-gray-700 whitespace-nowrap">
+                    口座開設
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white">
+                {domesticExchanges.map((exchange, index) => (
+                  <tr
+                    key={exchange.id}
+                    className={`border-b border-gray-100 hover:bg-blue-50/50 transition-colors ${
+                      index === 0 ? "" : ""
+                    }`}
+                  >
+                    <td className="px-4 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="shrink-0">
+                          <ExchangeLogo exchange={exchange.id} size={32} />
+                        </div>
+                        <div>
+                          <p className="font-semibold text-gray-900 whitespace-nowrap">
+                            {exchange.nameJa}
+                          </p>
+                          <div className="flex items-center gap-0.5 mt-0.5">
+                            {Array.from({ length: 5 }, (_, i) => (
+                              <Star
+                                key={i}
+                                className={`h-3 w-3 ${
+                                  i < Math.floor(exchange.rating)
+                                    ? "fill-amber-400 text-amber-400"
+                                    : "fill-gray-200 text-gray-200"
+                                }`}
+                              />
+                            ))}
+                            <span className="ml-1 text-xs text-gray-500">
+                              {exchange.rating.toFixed(1)}
+                            </span>
+                          </div>
+                        </div>
                       </div>
-                      <Badge variant="outline">{guide.badge}</Badge>
-                    </div>
-                    <CardTitle className="text-lg group-hover:text-primary transition-colors">
-                      {guide.title}
-                    </CardTitle>
-                    <CardDescription className="leading-relaxed">
-                      {guide.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <span className="inline-flex items-center text-sm font-medium text-primary">
-                      記事を読む
-                      <ArrowRight className="ml-1 h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
-                    </span>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
+                    </td>
+                    <td className="text-center px-4 py-4">
+                      <span className="font-semibold text-gray-900">
+                        {exchange.features.currencies}
+                      </span>
+                      <span className="text-gray-500 text-xs ml-0.5">種類</span>
+                    </td>
+                    <td className="text-center px-4 py-4">
+                      <span className="text-gray-700 text-xs whitespace-nowrap">
+                        {exchange.fees.trading}
+                      </span>
+                    </td>
+                    <td className="text-center px-4 py-4">
+                      <span className="text-gray-700 whitespace-nowrap">
+                        500円〜
+                      </span>
+                    </td>
+                    <td className="text-center px-4 py-4">
+                      <span className="font-semibold text-gray-900">
+                        {exchange.features.leverage > 0
+                          ? `${exchange.features.leverage}倍`
+                          : "なし"}
+                      </span>
+                    </td>
+                    <td className="text-center px-4 py-4">
+                      <a
+                        href={exchange.affiliate.url}
+                        target="_blank"
+                        rel="noopener noreferrer sponsored"
+                        className="inline-flex items-center gap-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 transition-colors whitespace-nowrap"
+                      >
+                        無料登録
+                        <ExternalLink className="h-3 w-3" />
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
+
+          <p className="mt-4 text-xs text-gray-400 text-center">
+            ※ 情報は2026年1月31日時点のものです。最新情報は各公式サイトをご確認ください。
+          </p>
         </div>
       </section>
 
       {/* ================================================================== */}
-      {/* 便利ツール Section */}
+      {/* Section 4: How to Choose */}
       {/* ================================================================== */}
-      <section className="py-16 sm:py-20 bg-muted/30">
-        <div className="container mx-auto px-4">
+      <section className="py-16 sm:py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground sm:text-4xl">
-              便利ツール
+            <h2 className="text-3xl font-bold text-gray-900">
+              仮想通貨取引所の選び方
             </h2>
-            <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
-              投資判断やポートフォリオ管理に役立つツールをご用意しました。
+            <p className="mt-3 text-gray-600 max-w-2xl mx-auto">
+              初めて口座を開設する方に向けて、取引所選びで重視すべき3つのポイントを解説します。
             </p>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 max-w-3xl mx-auto">
-            <Link href="/tools/calculator" className="group">
-              <Card className="h-full hover:shadow-lg hover:border-gold/30 transition-all duration-300">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gold/10 group-hover:bg-gold/20 transition-colors">
-                      <Calculator className="h-6 w-6 text-gold" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-foreground group-hover:text-gold transition-colors">
-                        損益計算シミュレーター
-                      </h3>
-                      <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
-                        購入価格と売却価格を入力するだけで、利益・損失額と税金の概算を自動計算。確定申告の参考にも。
-                      </p>
-                      <span className="mt-3 inline-flex items-center text-sm font-medium text-gold">
-                        ツールを使う
-                        <ArrowRight className="ml-1 h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
-                      </span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
+          <div className="grid gap-8 md:grid-cols-3">
+            {/* Point 1: Security */}
+            <div className="relative rounded-xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600 font-bold text-lg">
+                  1
+                </div>
+                <h3 className="text-lg font-bold text-gray-900">
+                  セキュリティ・信頼性
+                </h3>
+              </div>
+              <div className="flex items-start gap-3 mb-4">
+                <Shield className="h-5 w-5 text-blue-600 shrink-0 mt-0.5" />
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  金融庁に登録された取引所であることが大前提です。コールドウォレットでの資産管理比率や二段階認証の対応、過去のセキュリティ実績を確認しましょう。大手企業グループが運営する取引所は、経営基盤が安定しており信頼性が高い傾向にあります。
+                </p>
+              </div>
+              <ul className="space-y-2">
+                <li className="flex items-center gap-2 text-sm text-gray-700">
+                  <CheckCircle className="h-4 w-4 text-emerald-500 shrink-0" />
+                  金融庁登録済み
+                </li>
+                <li className="flex items-center gap-2 text-sm text-gray-700">
+                  <CheckCircle className="h-4 w-4 text-emerald-500 shrink-0" />
+                  コールドウォレット管理
+                </li>
+                <li className="flex items-center gap-2 text-sm text-gray-700">
+                  <CheckCircle className="h-4 w-4 text-emerald-500 shrink-0" />
+                  二段階認証・不正検知
+                </li>
+              </ul>
+            </div>
 
-            <Link href="/tools/simulator" className="group">
-              <Card className="h-full hover:shadow-lg hover:border-primary/30 transition-all duration-300">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                      <BarChart3 className="h-6 w-6 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
-                        積立投資シミュレーター
-                      </h3>
-                      <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
-                        毎月の積立額と期間を設定して、将来のリターンをシミュレーション。長期投資の計画にお役立てください。
-                      </p>
-                      <span className="mt-3 inline-flex items-center text-sm font-medium text-primary">
-                        ツールを使う
-                        <ArrowRight className="ml-1 h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
-                      </span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+            {/* Point 2: Fees */}
+            <div className="relative rounded-xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 font-bold text-lg">
+                  2
+                </div>
+                <h3 className="text-lg font-bold text-gray-900">
+                  手数料の安さ
+                </h3>
+              </div>
+              <div className="flex items-start gap-3 mb-4">
+                <Coins className="h-5 w-5 text-emerald-600 shrink-0 mt-0.5" />
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  取引手数料だけでなく、入出金手数料やスプレッドも含めた総コストで比較することが重要です。頻繁に取引する方は取引手数料、長期保有の方は入出金手数料を重視しましょう。手数料無料の取引所でもスプレッドが広い場合があるため注意が必要です。
+                </p>
+              </div>
+              <ul className="space-y-2">
+                <li className="flex items-center gap-2 text-sm text-gray-700">
+                  <CheckCircle className="h-4 w-4 text-emerald-500 shrink-0" />
+                  取引手数料
+                </li>
+                <li className="flex items-center gap-2 text-sm text-gray-700">
+                  <CheckCircle className="h-4 w-4 text-emerald-500 shrink-0" />
+                  入出金手数料
+                </li>
+                <li className="flex items-center gap-2 text-sm text-gray-700">
+                  <CheckCircle className="h-4 w-4 text-emerald-500 shrink-0" />
+                  スプレッドの狭さ
+                </li>
+              </ul>
+            </div>
+
+            {/* Point 3: Coin Variety */}
+            <div className="relative rounded-xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-amber-100 text-amber-600 font-bold text-lg">
+                  3
+                </div>
+                <h3 className="text-lg font-bold text-gray-900">
+                  取扱銘柄の豊富さ
+                </h3>
+              </div>
+              <div className="flex items-start gap-3 mb-4">
+                <TrendingUp className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  ビットコインやイーサリアムだけでなく、将来性のあるアルトコインにも投資したい場合は取扱通貨数が多い取引所を選びましょう。国内取引所でも20〜30種類以上の銘柄を取り扱うところが増えています。ステーキングやNFTに興味がある方は対応サービスの有無もチェックポイントです。
+                </p>
+              </div>
+              <ul className="space-y-2">
+                <li className="flex items-center gap-2 text-sm text-gray-700">
+                  <CheckCircle className="h-4 w-4 text-emerald-500 shrink-0" />
+                  取扱通貨の種類
+                </li>
+                <li className="flex items-center gap-2 text-sm text-gray-700">
+                  <CheckCircle className="h-4 w-4 text-emerald-500 shrink-0" />
+                  ステーキング対応
+                </li>
+                <li className="flex items-center gap-2 text-sm text-gray-700">
+                  <CheckCircle className="h-4 w-4 text-emerald-500 shrink-0" />
+                  NFT・DeFi連携
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ================================================================== */}
+      {/* Section 5: Beginner Guide CTA */}
+      {/* ================================================================== */}
+      <section className="py-16 sm:py-20 bg-gradient-to-r from-blue-600 to-blue-800">
+        <div className="max-w-6xl mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold text-white">
+            仮想通貨を始めるなら
+          </h2>
+          <p className="mt-4 text-blue-100 max-w-2xl mx-auto leading-relaxed">
+            口座開設は無料で、最短即日で取引を開始できます。
+            まずは少額から始めて、仮想通貨投資の基本を学びましょう。
+            初心者向けのガイドで、口座開設から購入方法まで丁寧に解説しています。
+          </p>
+          <div className="mt-8">
+            <Link
+              href="/guides"
+              className="inline-flex items-center gap-2 rounded-lg bg-white text-blue-700 font-bold px-8 py-3.5 text-base hover:bg-blue-50 transition-colors shadow-lg"
+            >
+              <BookOpen className="h-5 w-5" />
+              初心者ガイドを読む
+              <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
       </section>
 
       {/* ================================================================== */}
-      {/* Bottom CTA Section */}
+      {/* Section 6: Latest Articles/Tools */}
       {/* ================================================================== */}
-      <section className="py-16 sm:py-20 bg-gradient-to-b from-background to-muted/50">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-foreground sm:text-4xl">
-            仮想通貨を始めるなら今がチャンス
-          </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            各取引所でお得なキャンペーンを実施中です。
-            口座開設は無料で、最短即日で取引を始められます。
-            まずはおすすめの取引所をチェックしてみましょう。
-          </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button asChild variant="gold" size="lg" className="text-base px-10">
-              <Link href="/exchanges">
-                おすすめ取引所を見る
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="text-base px-8">
-              <Link href="/guides/crypto-beginners-guide">
-                まずはガイドを読む
-                <ChevronRight className="ml-1 h-4 w-4" />
-              </Link>
-            </Button>
+      <section className="py-16 sm:py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900">
+              お役立ちコンテンツ
+            </h2>
+            <p className="mt-3 text-gray-600 max-w-2xl mx-auto">
+              初心者ガイドや便利なツールで、仮想通貨投資をサポートします。
+            </p>
           </div>
-          <p className="mt-6 text-xs text-muted-foreground">
-            ※ 暗号資産の取引にはリスクが伴います。余裕資金での投資をおすすめします。
-          </p>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {/* Guide 1 */}
+            <Link
+              href="/guides/crypto-beginners-guide"
+              className="group rounded-xl border border-gray-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-blue-300 transition-all"
+            >
+              <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-50 group-hover:bg-blue-100 transition-colors mb-4">
+                <BookOpen className="h-5 w-5 text-blue-600" />
+              </div>
+              <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                仮想通貨の始め方ガイド
+              </h3>
+              <p className="mt-2 text-sm text-gray-500 leading-relaxed">
+                口座開設から初めての購入まで、仮想通貨の始め方をゼロから解説します。
+              </p>
+              <span className="mt-3 inline-flex items-center text-sm font-medium text-blue-600">
+                詳しく見る
+                <ArrowRight className="ml-1 h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </Link>
+
+            {/* Guide 2 */}
+            <Link
+              href="/guides/how-to-buy-bitcoin"
+              className="group rounded-xl border border-gray-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-blue-300 transition-all"
+            >
+              <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-amber-50 group-hover:bg-amber-100 transition-colors mb-4">
+                <TrendingUp className="h-5 w-5 text-amber-600" />
+              </div>
+              <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                ビットコインの買い方
+              </h3>
+              <p className="mt-2 text-sm text-gray-500 leading-relaxed">
+                ビットコインの具体的な購入方法を5ステップで分かりやすく解説します。
+              </p>
+              <span className="mt-3 inline-flex items-center text-sm font-medium text-blue-600">
+                詳しく見る
+                <ArrowRight className="ml-1 h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </Link>
+
+            {/* Tool 1 */}
+            <Link
+              href="/tools/calculator"
+              className="group rounded-xl border border-gray-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-blue-300 transition-all"
+            >
+              <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-emerald-50 group-hover:bg-emerald-100 transition-colors mb-4">
+                <Calculator className="h-5 w-5 text-emerald-600" />
+              </div>
+              <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                手数料計算ツール
+              </h3>
+              <p className="mt-2 text-sm text-gray-500 leading-relaxed">
+                購入・売却時の手数料や利益を自動計算。確定申告の参考にも活用できます。
+              </p>
+              <span className="mt-3 inline-flex items-center text-sm font-medium text-blue-600">
+                ツールを使う
+                <ArrowRight className="ml-1 h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </Link>
+
+            {/* Tool 2 */}
+            <Link
+              href="/tools/simulator"
+              className="group rounded-xl border border-gray-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-blue-300 transition-all"
+            >
+              <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-purple-50 group-hover:bg-purple-100 transition-colors mb-4">
+                <BarChart3 className="h-5 w-5 text-purple-600" />
+              </div>
+              <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                積立シミュレーター
+              </h3>
+              <p className="mt-2 text-sm text-gray-500 leading-relaxed">
+                毎月の積立額と期間を設定して、将来のリターンをシミュレーションできます。
+              </p>
+              <span className="mt-3 inline-flex items-center text-sm font-medium text-blue-600">
+                ツールを使う
+                <ArrowRight className="ml-1 h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ================================================================== */}
+      {/* Section 7: Disclaimer */}
+      {/* ================================================================== */}
+      <section className="py-10 sm:py-12 bg-gray-50 border-t border-gray-200">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="rounded-lg bg-white border border-gray-200 p-5">
+            <h3 className="text-sm font-bold text-gray-700 mb-2">
+              リスクに関する注意事項
+            </h3>
+            <p className="text-xs text-gray-500 leading-relaxed">
+              暗号資産（仮想通貨）の取引は、価格変動により損失が生じる可能性があります。暗号資産の価格は急激に変動することがあり、投資元本を失うリスクがあります。レバレッジ取引を利用した場合、預けた証拠金以上の損失が発生する可能性があります。取引を行う際は、各取引所の利用規約やリスクに関する説明を十分にご確認の上、ご自身の判断と責任において行ってください。当サイトの情報は、投資判断の参考として提供するものであり、特定の暗号資産の売買を推奨するものではありません。当サイトに掲載されている情報の正確性・完全性を保証するものではなく、掲載情報に基づいて被ったいかなる損害について、当サイトは責任を負いません。
+            </p>
+            <p className="text-xs text-gray-500 leading-relaxed mt-2">
+              当サイトは一部のリンクにおいてアフィリエイトプログラムを利用しており、リンク先のサービスへの登録や利用に対して報酬を受け取る場合があります。ただし、ランキングや評価はアフィリエイト報酬の有無に関わらず、編集部の独自基準に基づいて作成しています。
+            </p>
+          </div>
         </div>
       </section>
     </>
