@@ -65,7 +65,7 @@ const affiliateConfigs: AffiliateConfig[] = [
   {
     exchangeId: 'bitflyer',
     asp: 'A8.net',
-    baseUrl: 'https://example.com/affiliate/bitflyer',
+    baseUrl: 'https://bitflyer.com/ja-jp/',
     programId: 's00000025170001',
     mediaId: 'a24100100000',
     conversionType: 'registration',
@@ -75,7 +75,7 @@ const affiliateConfigs: AffiliateConfig[] = [
   {
     exchangeId: 'coincheck',
     asp: 'AccessTrade',
-    baseUrl: 'https://example.com/affiliate/coincheck',
+    baseUrl: 'https://coincheck.com/ja/',
     programId: '1234567',
     mediaId: 'crypto-affiliate-001',
     conversionType: 'registration',
@@ -85,7 +85,7 @@ const affiliateConfigs: AffiliateConfig[] = [
   {
     exchangeId: 'gmo-coin',
     asp: 'A8.net',
-    baseUrl: 'https://example.com/affiliate/gmo-coin',
+    baseUrl: 'https://coin.z.com/jp/',
     programId: 's00000020625001',
     mediaId: 'a24100100000',
     conversionType: 'trade',
@@ -95,7 +95,7 @@ const affiliateConfigs: AffiliateConfig[] = [
   {
     exchangeId: 'dmm-bitcoin',
     asp: 'TCS',
-    baseUrl: 'https://example.com/affiliate/dmm-bitcoin',
+    baseUrl: 'https://bitcoin.dmm.com/',
     programId: 'dmm_btc_001',
     mediaId: 'tcs-media-001',
     conversionType: 'registration',
@@ -105,7 +105,7 @@ const affiliateConfigs: AffiliateConfig[] = [
   {
     exchangeId: 'bitbank',
     asp: 'AccessTrade',
-    baseUrl: 'https://example.com/affiliate/bitbank',
+    baseUrl: 'https://bitbank.cc/',
     programId: '2345678',
     mediaId: 'crypto-affiliate-001',
     conversionType: 'registration',
@@ -115,7 +115,7 @@ const affiliateConfigs: AffiliateConfig[] = [
   {
     exchangeId: 'bitpoint',
     asp: 'TCS',
-    baseUrl: 'https://example.com/affiliate/bitpoint',
+    baseUrl: 'https://www.bitpoint.co.jp/',
     programId: 'bitpoint_001',
     mediaId: 'tcs-media-001',
     conversionType: 'registration',
@@ -126,7 +126,7 @@ const affiliateConfigs: AffiliateConfig[] = [
   {
     exchangeId: 'binance',
     asp: 'Direct',
-    baseUrl: 'https://example.com/affiliate/binance',
+    baseUrl: 'https://www.binance.com/ja',
     programId: 'ref_binance',
     mediaId: 'direct',
     conversionType: 'trade',
@@ -136,7 +136,7 @@ const affiliateConfigs: AffiliateConfig[] = [
   {
     exchangeId: 'bybit',
     asp: 'Direct',
-    baseUrl: 'https://example.com/affiliate/bybit',
+    baseUrl: 'https://www.bybit.com/ja-JP/',
     programId: 'ref_bybit',
     mediaId: 'direct',
     conversionType: 'trade',
@@ -146,7 +146,7 @@ const affiliateConfigs: AffiliateConfig[] = [
   {
     exchangeId: 'okx',
     asp: 'Direct',
-    baseUrl: 'https://example.com/affiliate/okx',
+    baseUrl: 'https://www.okx.com/ja',
     programId: 'ref_okx',
     mediaId: 'direct',
     conversionType: 'trade',
@@ -156,7 +156,7 @@ const affiliateConfigs: AffiliateConfig[] = [
   {
     exchangeId: 'gate-io',
     asp: 'Direct',
-    baseUrl: 'https://example.com/affiliate/gate-io',
+    baseUrl: 'https://www.gate.io/ja',
     programId: 'ref_gateio',
     mediaId: 'direct',
     conversionType: 'trade',
@@ -166,7 +166,7 @@ const affiliateConfigs: AffiliateConfig[] = [
   {
     exchangeId: 'mexc',
     asp: 'Direct',
-    baseUrl: 'https://example.com/affiliate/mexc',
+    baseUrl: 'https://www.mexc.com/ja-JP',
     programId: 'ref_mexc',
     mediaId: 'direct',
     conversionType: 'trade',

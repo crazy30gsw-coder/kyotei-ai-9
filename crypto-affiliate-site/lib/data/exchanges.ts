@@ -89,7 +89,7 @@ export const exchanges: Exchange[] = [
       deadline: '2026-03-31',
     },
     affiliate: {
-      url: 'https://example.com/affiliate/bitflyer',
+      url: 'https://bitflyer.com/ja-jp/',
       asp: 'A8.net',
       bonus: '口座開設完了で5,000円',
     },
@@ -140,7 +140,7 @@ export const exchanges: Exchange[] = [
       deadline: '2026-02-28',
     },
     affiliate: {
-      url: 'https://example.com/affiliate/coincheck',
+      url: 'https://coincheck.com/ja/',
       asp: 'AccessTrade',
       bonus: '口座開設完了で3,000円',
     },
@@ -191,7 +191,7 @@ export const exchanges: Exchange[] = [
       deadline: '2026-03-15',
     },
     affiliate: {
-      url: 'https://example.com/affiliate/gmo-coin',
+      url: 'https://coin.z.com/jp/',
       asp: 'A8.net',
       bonus: '口座開設＋取引で7,000円',
     },
@@ -242,7 +242,7 @@ export const exchanges: Exchange[] = [
       deadline: '2026-04-01',
     },
     affiliate: {
-      url: 'https://example.com/affiliate/dmm-bitcoin',
+      url: 'https://bitcoin.dmm.com/',
       asp: 'TCS',
       bonus: '口座開設完了で4,000円',
     },
@@ -293,7 +293,7 @@ export const exchanges: Exchange[] = [
       deadline: '2026-03-31',
     },
     affiliate: {
-      url: 'https://example.com/affiliate/bitbank',
+      url: 'https://bitbank.cc/',
       asp: 'AccessTrade',
       bonus: '口座開設完了で3,500円',
     },
@@ -344,7 +344,7 @@ export const exchanges: Exchange[] = [
       deadline: '2026-02-28',
     },
     affiliate: {
-      url: 'https://example.com/affiliate/bitpoint',
+      url: 'https://www.bitpoint.co.jp/',
       asp: 'TCS',
       bonus: '口座開設完了で2,500円',
     },
@@ -400,7 +400,7 @@ export const exchanges: Exchange[] = [
       deadline: undefined,
     },
     affiliate: {
-      url: 'https://example.com/affiliate/binance',
+      url: 'https://www.binance.com/ja',
       asp: 'Direct',
       bonus: '取引手数料の20%還元',
     },
@@ -451,7 +451,7 @@ export const exchanges: Exchange[] = [
       deadline: '2026-03-31',
     },
     affiliate: {
-      url: 'https://example.com/affiliate/bybit',
+      url: 'https://www.bybit.com/ja-JP/',
       asp: 'Direct',
       bonus: '取引手数料の30%還元',
     },
@@ -502,7 +502,7 @@ export const exchanges: Exchange[] = [
       deadline: '2026-04-30',
     },
     affiliate: {
-      url: 'https://example.com/affiliate/okx',
+      url: 'https://www.okx.com/ja',
       asp: 'Direct',
       bonus: '取引手数料の20%還元',
     },
@@ -553,7 +553,7 @@ export const exchanges: Exchange[] = [
       deadline: undefined,
     },
     affiliate: {
-      url: 'https://example.com/affiliate/gate-io',
+      url: 'https://www.gate.io/ja',
       asp: 'Direct',
       bonus: '取引手数料の30%還元',
     },
@@ -604,7 +604,7 @@ export const exchanges: Exchange[] = [
       deadline: undefined,
     },
     affiliate: {
-      url: 'https://example.com/affiliate/mexc',
+      url: 'https://www.mexc.com/ja-JP',
       asp: 'Direct',
       bonus: '取引手数料の40%還元',
     },
