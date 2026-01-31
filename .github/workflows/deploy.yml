@@ -2,23 +2,17 @@ name: Deploy CryptoNavi to GitHub Pages
 
 on:
   push:
-    branches: ["claude/crypto-affiliate-site-j5GQA", "main"]
+    branches: ["claude/crypto-affiliate-site-j5GQA"]
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  contents: write
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout feature branch
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -36,21 +30,31 @@ jobs:
         working-directory: crypto-affiliate-site
         run: npm run build
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+      - name: Deploy to main branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: crypto-affiliate-site/out
+          # Save built output
+          cp -r crypto-affiliate-site/out /tmp/site-output
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          # Switch to main branch
+          git fetch origin main
+          git checkout main
+
+          # Remove old content (keep .git, .github, crypto-affiliate-site, README.md)
+          find . -maxdepth 1 \
+            ! -name '.' \
+            ! -name '.git' \
+            ! -name '.github' \
+            ! -name 'README.md' \
+            -exec rm -rf {} +
+
+          # Copy new build output
+          cp -r /tmp/site-output/* .
+          touch .nojekyll
+
+          # Commit and push to main
+          git add -A
+          git diff --cached --quiet || git commit -m "deploy: update CryptoNavi site"
+          git push origin main
